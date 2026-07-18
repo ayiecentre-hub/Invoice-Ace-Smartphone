@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACE Books — Sistem Kira-Kira ACE Smartphone</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --bg:#0b1220; --card:#131c2e; --line:#22304a; --txt:#e6edf7; --sub:#8ba0bf;
+    --green:#22c55e; --red:#f2555a; --blue:#38bdf8; --accent:#7dd3fc;
+  }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:var(--bg); color:var(--txt); line-height:1.5; padding-bottom:60px; }
+  header { background:linear-gradient(135deg,#0f172a,#1e3a5f); padding:22px 20px; }
+  header h1 { font-size:22px; font-weight:800; }
+  header p { color:var(--accent); font-size:13px; margin-top:2px; }
+  .wrap { max-width:960px; margin:0 auto; padding:0 16px; }
+
+  #setup { display:none; background:#3b2410; border:1px solid #a56a2b; color:#ffd9a8;
+    border-radius:14px; padding:18px; margin:20px 0; font-size:14px; line-height:1.6; }
+  #setup b { color:#fff; }
+  #status { font-size:12px; color:var(--sub); margin:14px 0 0; }
+  .dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--sub); margin-right:6px; }
+  .dot.ok { background:var(--green); } .dot.bad { background:var(--red); }
+
+  .stats { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin:20px 0; }
+  .stat { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; }
+  .stat .lbl { font-size:11px; color:var(--sub); text-transform:uppercase; letter-spacing:.5px; }
+  .stat .val { font-size:22px; font-weight:800; margin-top:6px; }
+  .stat .val.g { color:var(--green); } .stat .val.b { color:var(--blue); }
+  .grid { display:grid; grid-template-columns:340px 1fr; gap:16px; align-items:start; }
+  .panel { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px; }
+  .panel h2 { font-size:15px; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  label { display:block; font-size:12px; color:var(--sub); margin:10px 0 4px; }
+  input, select { width:100%; padding:10px 12px; background:#0e1626; border:1px solid var(--line);
+    border-radius:10px; color:var(--txt); font-size:14px; }
+  input:focus, select:focus { outline:none; border-color:var(--blue); }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  button.add { width:100%; margin-top:14px; padding:12px; border:none; border-radius:10px;
+    background:var(--green); color:#062012; font-weight:700; font-size:15px; cursor:pointer; }
+  button.add:hover { filter:brightness(1.08); } button.add:disabled { opacity:.5; cursor:not-allowed; }
+  .seg { display:flex; gap:8px; margin-bottom:6px; }
+  .seg button { flex:1; padding:9px; border:1px solid var(--line); background:#0e1626;
+    color:var(--sub); border-radius:10px; cursor:pointer; font-weight:600; font-size:13px; }
+  .seg button.on { background:var(--blue); color:#04121c; border-color:var(--blue); }
+  table { width:100%; border-collapse:collapse; }
+  th { text-align:left; font-size:11px; color:var(--sub); text-transform:uppercase;
+    padding:8px; border-bottom:1px solid var(--line); }
+  td { padding:10px 8px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:top; }
+  .amt-in { color:var(--green); font-weight:700; } .amt-out { color:var(--red); font-weight:700; }
+  .tag { font-size:11px; padding:2px 8px; border-radius:999px; background:#0e1626; color:var(--sub); }
+  .del { color:var(--red); cursor:pointer; background:none; border:none; font-size:16px; }
+  .empty { text-align:center; color:var(--sub); padding:30px; font-size:14px; }
+  .bar { height:8px; background:#0e1626; border-radius:999px; overflow:hidden; margin-top:14px; }
+  .bar > div { height:100%; background:var(--green); transition:width .3s; }
+  .hint { font-size:12px; color:var(--sub); margin-top:8px; }
+  @media (max-width:760px){ .grid{grid-template-columns:1fr;} .stats{grid-template-columns:1fr 1fr;} }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>📱 ACE Books</h1>
+  <p>Sistem kira-kira ACE Smartphone · Kepala Batas · <span id="teamTag">team edition</span></p>
+</div></header>
+
+<div class="wrap">
+
+  <div id="setup">
+    ⚙️ <b>Setup belum siap.</b> Buka file <b>config.js</b>, paste your Supabase
+    <b>Project URL</b> and <b>anon public key</b>, then refresh.
+    Full guide dalam <b>README.md</b>.
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">Hari ini (Sales)</div><div class="val g" id="sToday">RM0</div></div>
+    <div class="stat"><div class="lbl">Bulan ini (Sales)</div><div class="val g" id="sMonth">RM0</div></div>
+    <div class="stat"><div class="lbl">Untung bulan ini</div><div class="val b" id="sProfit">RM0</div></div>
+    <div class="stat"><div class="lbl">Jobs bulan ini</div><div class="val" id="sJobs">0</div></div>
+    <div class="stat"><div class="lbl">Belum bayar supplier</div><div class="val" style="color:var(--red)" id="sUnpaid">RM0</div></div>
+    <div class="stat"><div class="lbl">Beli part bulan ini</div><div class="val" id="sParts">RM0</div></div>
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <h2>➕ Tambah rekod</h2>
+      <div class="seg">
+        <button id="tSale" class="on" data-type="sale">Sale / Repair</button>
+        <button id="tExp" data-type="expense">Expense</button>
+      </div>
+
+      <div id="saleFields">
+        <label>Customer / description</label>
+        <input id="desc" placeholder="cth: Ali - iPhone 12 battery">
+        <div class="row2">
+          <div><label>iPhone model</label><input id="model" placeholder="iPhone 12"></div>
+          <div><label>Service</label>
+            <select id="service">
+              <option>Battery</option><option>LCD / Screen</option>
+              <option>Charging</option><option>Sales (phone)</option><option>Other</option>
+            </select></div>
+        </div>
+        <div class="row2">
+          <div><label>Charge customer (RM)</label><input id="amount" type="number" placeholder="180"></div>
+          <div><label>Part cost (RM)</label><input id="cost" type="number" placeholder="60"></div>
+        </div>
+      </div>
+
+      <div id="expFields" style="display:none;">
+        <label>What for?</label>
+        <input id="edesc" placeholder="cth: Sewa kedai">
+        <label>Amount (RM)</label>
+        <input id="eamount" type="number" placeholder="500">
+      </div>
+
+      <button class="add" id="btnAdd">Simpan rekod</button>
+      <p class="hint">Tersimpan dalam database. Semua team nampak sama, live.</p>
+    </div>
+
+    <div class="panel">
+      <h2>🧾 Rekod terkini</h2>
+      <table><thead><tr>
+        <th>Tarikh</th><th>Description</th><th>Type</th><th>Untung</th><th>Amount</th><th></th>
+      </tr></thead><tbody id="rows"></tbody></table>
+      <div class="empty" id="empty">Loading…</div>
+      <div class="bar"><div id="marginBar" style="width:0%"></div></div>
+      <p class="hint" id="marginTxt">Margin bulan ini: —</p>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>📦 Invois Supplier (sparepart)</h2>
+    <div class="grid" style="grid-template-columns:340px 1fr;">
+      <div>
+        <label>Nama supplier</label>
+        <input id="iSupplier" placeholder="cth: KL Parts Trading">
+        <div class="row2">
+          <div><label>No. invois</label><input id="iNo" placeholder="INV-2043"></div>
+          <div><label>Tarikh invois</label><input id="iDate" type="date"></div>
+        </div>
+        <label>Barang / sparepart</label>
+        <input id="iItems" placeholder="cth: 10x iPhone 12 LCD, 5x battery">
+        <div class="row2">
+          <div><label>Jumlah (RM)</label><input id="iAmount" type="number" placeholder="1200"></div>
+          <div><label>Status</label>
+            <select id="iStatus"><option value="unpaid">Belum bayar</option><option value="paid">Dah bayar</option></select></div>
+        </div>
+        <button class="add" id="btnInv">Simpan invois</button>
+        <p class="hint">Klik status dalam table untuk tukar bayar / belum bayar.</p>
+      </div>
+      <div>
+        <table><thead><tr>
+          <th>Tarikh</th><th>Supplier</th><th>No.</th><th>Barang</th><th>Jumlah</th><th>Status</th><th></th>
+        </tr></thead><tbody id="invRows"></tbody></table>
+        <div class="empty" id="invEmpty">Loading…</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid" style="margin-top:16px;">
+    <div class="panel">
+      <h2>📊 P&amp;L Report — Untung Rugi (bulan ini)</h2>
+      <table>
+        <tr><td>Jumlah Jualan (Sales + Repair)</td><td style="text-align:right" class="amt-in" id="plSales">RM0</td></tr>
+        <tr><td>(−) Kos Sparepart</td><td style="text-align:right" class="amt-out" id="plParts">RM0</td></tr>
+        <tr><td style="font-weight:700">= Untung Kasar</td><td style="text-align:right;font-weight:700" id="plGross">RM0</td></tr>
+        <tr><td>(−) Expenses lain</td><td style="text-align:right" class="amt-out" id="plExp">RM0</td></tr>
+        <tr><td style="font-weight:800;font-size:16px">= UNTUNG BERSIH</td><td style="text-align:right;font-weight:800;font-size:16px" id="plNet">RM0</td></tr>
+      </table>
+      <p class="hint">Auto dari rekod team. Tiada data palsu.</p>
+    </div>
+    <div class="panel">
+      <h2>🧠 Smart Analysis</h2>
+      <div id="smart"><div class="empty">Tambah beberapa rekod, nanti sini keluar insight bisnes kau.</div></div>
+    </div>
+  </div>
+
+  <p id="status"><span class="dot" id="connDot"></span><span id="connTxt">Menyambung ke database…</span></p>
+</div>
+
+<script src="config.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
