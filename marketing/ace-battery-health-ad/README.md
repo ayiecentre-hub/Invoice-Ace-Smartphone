@@ -1,5 +1,14 @@
 # ACE Smartphone: "Battery % ≠ Battery Health" (20s TikTok ad)
 
+Two variations of the same brief live in one project:
+
+| Composition | Creative argument | Render |
+|---|---|---|
+| `AceBatteryHealth` (A) | **The tank.** % = how full the tank is; Health = how big the tank still is | `npm run render` |
+| `AceBatteryHealthV2` (B) | **Two clocks.** % moves by the *hour*; Health moves over the *years* | `npm run render:v2` |
+
+Both use the same script, scene slots, colours, iPhone 13 and 76%, so they can be A/B tested fairly. `npm run render:all` renders both.
+
 A coded motion-graphics project built with **Remotion 4 + React + TypeScript**.
 Output: 1080×1920, 9:16, 30 fps, 20 s (600 frames), H.264 + AAC.
 
@@ -75,6 +84,22 @@ These settings suit TikTok, Instagram Reels and Facebook Reels. Upload the MP4 d
 
 The scene frames live in `src/timing.ts → SCENES`. Scenes 02, 05 and 06 are held a few frames
 past their slot so the next scene can reveal over them.
+
+### Variation B scene map (`src/v2/`)
+
+| # | Time | What is different from A |
+|---|---|---|
+| 01 | 0:00–0:02.5 | A rounded **lens mask** punches from the phone's spot to full frame, revealing a macro of the lock screen. "BATERI" sits on a Trust-Blue marker block that wipes in |
+| 02 | 0:02.5–0:05 | A pearl outline **traces the phone** (mask separation), then the phone **shrinks into card A**: it literally becomes "Battery %". Side-by-side cards, with the ≠ badge bridging them |
+| 03 | 0:05–0:09 | Panel drops from the top. **Left:** segmented gauge 100 → 30, card "Status bar 30%", chart *BERUBAH SETIAP JAM*. **Right:** cropped real screen → **magnifier** pulls "Maximum Capacity" out into a card (100 → 76%), a tracking line runs 76% → label, chart *BERUBAH BERTAHUN* |
+| 04 | 0:09–0:12 | Editorial **triptych**: three strips open one by one (face, terminal, 3% + Lightning cable), then whip out |
+| 05 | 0:12–0:16 | Pearl wipes in from the right as the phone **crosses the frame** and lands beside a technician panel. Scan sweep, pinned 76% tag, progress rail CHECK → DIAGNOSE → EXPLAIN → CUSTOMER DECIDES (gold ✓ on the last node only) |
+| 06 | 0:16–0:18 | Navy sweep. Each line lands centre, then steps back. The punchline starts **squeezed** (tight tracking = pressure) and **exhales** to relaxed spacing = *tak menekan-nekan* |
+| 07 | 0:18–0:20 | Horizontal brand lockup; a chat bubble **types "SEMAK BATERI" and is delivered ✓✓** (it shows exactly what to send), then the CTA pulse and chime |
+
+Variation B uses its own cue sheet (`src/v2/timing.ts → SFX_V2`), its own music bed
+(`public/audio/music-bed-v2.wav`: 100 BPM felt piano) and an optional `public/assets/voiceover-v2.wav`.
+The VO script and windows are identical to A, so one recording can serve both: copy it to both file names.
 
 ## 6. Voice-over timing map (record to picture)
 

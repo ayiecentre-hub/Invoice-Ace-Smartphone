@@ -75,6 +75,36 @@ fade = np.ones(N); fi = int(19.0 * SR); fade[fi:] = np.linspace(1, 0.0, N - fi)
 L *= fade; R *= fade
 write("music-bed.wav", np.stack([L, R], 1), 0.8)
 
+# ---------------- music bed v2 (20s, 100 BPM, felt-piano documentary) ----------------
+N = int(T * SR); L = np.zeros(N); R = np.zeros(N)
+beat = 60 / 100
+
+
+def felt(f, d=1.2):
+    t = t_(d)
+    s = np.sin(2 * np.pi * f * t) + 0.35 * np.sin(2 * np.pi * 2 * f * t) * np.exp(-t * 6) + 0.1 * np.sin(2 * np.pi * 3 * f * t) * np.exp(-t * 9)
+    return lp(s * env(t, 0.006, 3.2), 5)
+
+
+Am = [220.0, 261.63, 329.63, 392.0]; Fm7 = [174.61, 220.0, 261.63, 329.63]
+C2 = [261.63, 329.63, 392.0, 493.88]; G2 = [196.0, 246.94, 293.66, 392.0]
+prog2 = [(0, Am), (4 * beat, Fm7), (8 * beat, Am), (12 * beat, Fm7), (16 * beat, C2), (20 * beat, G2), (24 * beat, C2), (28 * beat, C2), (32 * beat, C2)]
+for st, ch in prog2:
+    if st >= T: break
+    put(pad([c / 2 for c in ch], min(4 * beat, T - st) + 0.5, 1.0), st, 0.085)
+pat2 = [0, 2, 3, 2, 1, 2, 3, 2]
+k = 0; t = 0.0
+while t < T - 0.1:
+    ch = [c for st, c in prog2 if st <= t][-1]
+    if k % 2 == 0 or t > 5:
+        put(felt(ch[pat2[k % 8]] * (2 if k % 4 else 1)), t, 0.075, pan=0.25 if k % 2 else -0.25)
+    if 2.4 < t < 17.9 and k % 4 == 0:
+        put(pulse(50, 0.5), t, 0.2); put(pulse(50, 0.4), t + beat * 0.5, 0.08)
+    t += beat / 2; k += 1
+fade = np.ones(N); fi = int(19.0 * SR); fade[fi:] = np.linspace(1, 0.0, N - fi)
+L *= fade; R *= fade
+write("music-bed-v2.wav", np.stack([L, R], 1), 0.8)
+
 # ---------------- SFX ----------------
 t = t_(0.9)
 beep = np.zeros(len(t))

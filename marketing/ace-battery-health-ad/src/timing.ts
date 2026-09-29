@@ -20,7 +20,9 @@ export type Emphasis = "blue" | "gold" | "serif";
  * Scenes whose kinetic headline already says the VO line (hook, trust, CTA) carry no
  * subtitle, so the same words never appear twice on screen.
  */
-export const SUBTITLES: { from: number; to: number; text: string }[] = [
+export type SubtitleCue = { from: number; to: number; text: string };
+
+export const SUBTITLES: SubtitleCue[] = [
   { from: s(2.55), to: s(4.95), text: "Ramai tak tahu, [Battery %]{blue} dengan [Battery Health]{blue} bukan benda sama." },
   { from: s(5.05), to: s(6.95), text: "[Battery %]{blue} cuma tunjuk baki caj." },
   { from: s(7.0), to: s(8.95), text: "[Battery Health]{blue} tunjuk keadaan kapasiti bateri." },
@@ -44,7 +46,9 @@ export type SfxName =
   | "impact-soft" | "scan" | "chime" | "pop";
 
 /** Sound design cue sheet: every cue is tied to a visual event (frame numbers are absolute). */
-export const SFX: { at: number; name: SfxName; volume: number }[] = [
+export type SfxCue = { at: number; name: SfxName; volume: number };
+
+export const SFX: SfxCue[] = [
   { at: 12, name: "whoosh-soft", volume: 0.35 }, //  punch-in to phone
   { at: 30, name: "low-battery", volume: 0.55 }, //  alert appears on screen
   { at: 71, name: "whoosh", volume: 0.45 }, //       freeze → explainer

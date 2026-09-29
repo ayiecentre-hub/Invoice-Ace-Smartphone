@@ -3,15 +3,15 @@ import { useCurrentFrame } from "remotion";
 import { COLORS, CONTENT, EASE, FONTS } from "../theme";
 import { tween } from "../lib/anim";
 import { parseMarkup } from "../lib/markup";
-import { SUBTITLES } from "../timing";
+import { SUBTITLES, type SubtitleCue } from "../timing";
 
 /**
  * Editorial burned-in captions. Blue phrases become solid Trust-Blue chips (legible on the
  * navy plate); gold phrases are set in Warm Gold. Kept above the TikTok bottom UI band.
  */
-export const Subtitle: React.FC = () => {
+export const Subtitle: React.FC<{ cues?: SubtitleCue[] }> = ({ cues = SUBTITLES }) => {
   const frame = useCurrentFrame();
-  const cue = SUBTITLES.find((c) => frame >= c.from && frame < c.to);
+  const cue = cues.find((c) => frame >= c.from && frame < c.to);
   if (!cue) return null;
   const inP = tween(frame, cue.from, 8, 0, 1, EASE.out);
   const outP = tween(frame, cue.to - 5, 5, 0, 1, EASE.in);
