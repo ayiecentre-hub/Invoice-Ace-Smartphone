@@ -14,6 +14,7 @@ The project also holds poster-driven campaigns that reuse the same component lib
 | Composition | Source poster | Render | Campaign doc |
 |---|---|---|---|
 | `AceBateriMerah` | "Baru Keluar, Bateri Dah Merah?" | `npm run render:merah` | [`docs/CAMPAIGN-bateri-merah.md`](docs/CAMPAIGN-bateri-merah.md): poster analysis, storyboard, VO, asset guide, QC |
+| `AceCariPlug` | "Asyik Cari Plug Setiap Hari?" | `npm run render:plug` | [`docs/CAMPAIGN-cari-plug.md`](docs/CAMPAIGN-cari-plug.md): poster analysis, storyboard, VO, asset guide, QC |
 
 `npm run render:all` renders every composition.
 

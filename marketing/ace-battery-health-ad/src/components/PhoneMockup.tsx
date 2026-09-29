@@ -12,13 +12,16 @@ type Props = {
   /** 0–1 extra glass reflection sweep position (for the diagnostic scene). */
   sheen?: number;
   shadow?: boolean;
+  /** Band finish. "silver" matches the stainless/silver Pro models seen on some posters. */
+  finish?: "midnight" | "silver";
 };
 
 /**
  * Vector iPhone 13 (Midnight): flat aluminium band, wide notch (no Dynamic Island),
  * left silent switch + volume buttons, right side button. Proportions from 71.5 × 146.7 mm.
  */
-export const PhoneMockup: React.FC<Props> = ({ width, children, style, sheen, shadow = true }) => {
+export const PhoneMockup: React.FC<Props> = ({ width, children, style, sheen, shadow = true, finish = "midnight" }) => {
+  const silver = finish === "silver";
   const h = width * (146.7 / 71.5);
   const bezel = width * 0.036;
   const radius = width * 0.158;
@@ -32,7 +35,7 @@ export const PhoneMockup: React.FC<Props> = ({ width, children, style, sheen, sh
     width: width * 0.014,
     height: h * len,
     borderRadius: width * 0.01,
-    background: "linear-gradient(90deg,#15161b,#3a3c44,#15161b)",
+    background: silver ? "linear-gradient(90deg,#9a9ca3,#e9eaee,#9a9ca3)" : "linear-gradient(90deg,#15161b,#3a3c44,#15161b)",
   });
   return (
     <div style={{ position: "relative", width, height: h, ...style }}>
@@ -46,7 +49,9 @@ export const PhoneMockup: React.FC<Props> = ({ width, children, style, sheen, sh
           position: "absolute",
           inset: 0,
           borderRadius: radius,
-          background: "linear-gradient(135deg,#3b3d45 0%,#191a1f 38%,#2c2e35 70%,#101114 100%)",
+          background: silver
+            ? "linear-gradient(135deg,#f2f3f5 0%,#a9abb2 36%,#e4e5e9 64%,#8d9097 100%)"
+            : "linear-gradient(135deg,#3b3d45 0%,#191a1f 38%,#2c2e35 70%,#101114 100%)",
           boxShadow: shadow
             ? "0 60px 120px rgba(18,18,31,0.45), 0 18px 40px rgba(18,18,31,0.35), inset 0 0 0 1.5px rgba(255,255,255,0.08)"
             : "inset 0 0 0 1.5px rgba(255,255,255,0.08)",

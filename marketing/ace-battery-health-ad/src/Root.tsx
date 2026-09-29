@@ -3,6 +3,7 @@ import { Composition } from "remotion";
 import { AceBatteryHealth } from "./AceBatteryHealth";
 import { AceBatteryHealthV2 } from "./v2/AceBatteryHealthV2";
 import { AceBateriMerah } from "./bateri-merah/AceBateriMerah";
+import { AceCariPlug } from "./cari-plug/AceCariPlug";
 import { VIDEO } from "./theme";
 
 export const RemotionRoot: React.FC = () => (
@@ -29,6 +30,15 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="AceBateriMerah"
       component={AceBateriMerah}
+      width={VIDEO.width}
+      height={VIDEO.height}
+      fps={VIDEO.fps}
+      durationInFrames={VIDEO.durationInFrames}
+    />
+    {/* Campaign: "Asyik Cari Plug Setiap Hari?" (poster-driven) */}
+    <Composition
+      id="AceCariPlug"
+      component={AceCariPlug}
       width={VIDEO.width}
       height={VIDEO.height}
       fps={VIDEO.fps}
