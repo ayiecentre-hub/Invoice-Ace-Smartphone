@@ -1,0 +1,23 @@
+{
+  "name": "ace-battery-health-ad",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ACE Smartphone - Battery % ≠ Battery Health - 20s vertical TikTok ad (Remotion)",
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render AceBatteryHealth out/ace-battery-health-20s.mp4",
+    "still": "remotion still AceBatteryHealth out/still.png --frame=200",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.529",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "remotion": "^4.0.529"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "typescript": "^5.6.3"
+  }
+}
