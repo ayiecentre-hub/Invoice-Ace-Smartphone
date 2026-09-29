@@ -105,6 +105,28 @@ fade = np.ones(N); fi = int(19.0 * SR); fade[fi:] = np.linspace(1, 0.0, N - fi)
 L *= fade; R *= fade
 write("music-bed-v2.wav", np.stack([L, R], 1), 0.8)
 
+# ---------------- music bed v3 (20s, 104 BPM, "journey": steady eighth-note pulse) ----------------
+N = int(T * SR); L = np.zeros(N); R = np.zeros(N)
+rng3 = np.random.default_rng(33)  # separate stream so the SFX below stay identical
+beat = 60 / 104
+Bm = [123.47, 146.83, 185.0, 246.94]; G3 = [98.0, 123.47, 146.83, 196.0]
+D3 = [146.83, 185.0, 220.0, 293.66]; A3 = [110.0, 138.59, 164.81, 220.0]
+prog3 = [(0, Bm), (4 * beat, G3), (8 * beat, Bm), (12 * beat, G3), (16 * beat, D3), (20 * beat, A3), (24 * beat, D3), (28 * beat, D3), (32 * beat, D3)]
+for st, ch in prog3:
+    if st >= T: break
+    put(pad([c for c in ch], min(4 * beat, T - st) + 0.5, 0.6), st, 0.075)
+k = 0; t = 0.0
+while t < T - 0.1:
+    ch = [c for st, c in prog3 if st <= t][-1]
+    put(pluck(ch[[0, 3, 2, 3][k % 4]] * 2, 0.35, 12), t, 0.06 * (0.6 if t < 2.4 else 1), pan=0.3 if k % 2 else -0.3)
+    if 2.4 < t < 17.9:
+        if k % 2 == 0: put(pulse(52, 0.35), t, 0.2)
+        n = int(0.03 * SR); put(lp(rng3.standard_normal(n), 2) * np.exp(-np.arange(n) / SR * 160), t + beat / 4, 0.02)
+    t += beat / 2; k += 1
+fade = np.ones(N); fi = int(19.0 * SR); fade[fi:] = np.linspace(1, 0.0, N - fi)
+L *= fade; R *= fade
+write("music-bed-v3.wav", np.stack([L, R], 1), 0.8)
+
 # ---------------- SFX ----------------
 t = t_(0.9)
 beep = np.zeros(len(t))

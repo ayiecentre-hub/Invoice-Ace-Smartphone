@@ -16,6 +16,8 @@ export const COLORS = {
   hairlineOnNavy: "rgba(247,247,248,0.18)",
   /** Muted (not neon) red, used ONLY for the literal low-battery indicator. */
   lowBattery: "#C9463D",
+  /** Readable muted red for the literal word "MERAH" on navy (≈4.6:1). */
+  alertText: "#E0685C",
   iosGreen: "#34C759",
 } as const;
 

@@ -7,7 +7,15 @@ Two variations of the same brief live in one project:
 | `AceBatteryHealth` (A) | **The tank.** % = how full the tank is; Health = how big the tank still is | `npm run render` |
 | `AceBatteryHealthV2` (B) | **Two clocks.** % moves by the *hour*; Health moves over the *years* | `npm run render:v2` |
 
-Both use the same script, scene slots, colours, iPhone 13 and 76%, so they can be A/B tested fairly. `npm run render:all` renders both.
+Both use the same script, scene slots, colours, iPhone 13 and 76%, so they can be A/B tested fairly.
+
+The project also holds poster-driven campaigns that reuse the same component library:
+
+| Composition | Source poster | Render | Campaign doc |
+|---|---|---|---|
+| `AceBateriMerah` | "Baru Keluar, Bateri Dah Merah?" | `npm run render:merah` | [`docs/CAMPAIGN-bateri-merah.md`](docs/CAMPAIGN-bateri-merah.md): poster analysis, storyboard, VO, asset guide, QC |
+
+`npm run render:all` renders every composition.
 
 A coded motion-graphics project built with **Remotion 4 + React + TypeScript**.
 Output: 1080×1920, 9:16, 30 fps, 20 s (600 frames), H.264 + AAC.
