@@ -4,6 +4,8 @@ import { AceBatteryHealth } from "./AceBatteryHealth";
 import { AceBatteryHealthV2 } from "./v2/AceBatteryHealthV2";
 import { AceBateriMerah } from "./bateri-merah/AceBateriMerah";
 import { AceCariPlug } from "./cari-plug/AceCariPlug";
+import { AceTengahLive } from "./tengah-live/AceTengahLive";
+import { TL_DURATION } from "./tengah-live/timing";
 import { VIDEO } from "./theme";
 
 export const RemotionRoot: React.FC = () => (
@@ -43,6 +45,15 @@ export const RemotionRoot: React.FC = () => (
       height={VIDEO.height}
       fps={VIDEO.fps}
       durationInFrames={VIDEO.durationInFrames}
+    />
+    {/* Campaign: "Tengah Live, Bateri Buat Hal?" (poster-driven, 30 s) */}
+    <Composition
+      id="AceTengahLive"
+      component={AceTengahLive}
+      width={VIDEO.width}
+      height={VIDEO.height}
+      fps={VIDEO.fps}
+      durationInFrames={TL_DURATION}
     />
   </>
 );

@@ -1,8 +1,7 @@
 import React from "react";
-import { Audio, interpolate, Sequence, staticFile } from "remotion";
+import { Audio, interpolate, Sequence, staticFile, useVideoConfig } from "remotion";
 import { CONFIG } from "../config";
 import { SFX, type SfxCue } from "../timing";
-import { VIDEO } from "../theme";
 
 /**
  * Music bed + cue-sheet SFX (src/timing.ts → SFX). When a voice-over is enabled the bed
@@ -13,13 +12,14 @@ export const AudioLayer: React.FC<{ cues?: SfxCue[]; bedFile?: string; voiceover
   bedFile = "audio/music-bed.wav",
   voiceoverFile = "assets/voiceover.wav",
 }) => {
+  const { durationInFrames } = useVideoConfig();
   const bed = CONFIG.ENABLE_VOICEOVER ? 0.3 : 0.62;
   return (
     <>
       <Audio
         src={staticFile(bedFile)}
         volume={(f) =>
-          interpolate(f, [0, 10, VIDEO.durationInFrames - 20, VIDEO.durationInFrames], [0, bed, bed, 0], {
+          interpolate(f, [0, 10, durationInFrames - 20, durationInFrames], [0, bed, bed, 0], {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",
           })
