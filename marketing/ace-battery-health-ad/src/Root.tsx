@@ -6,6 +6,8 @@ import { AceBateriMerah } from "./bateri-merah/AceBateriMerah";
 import { AceCariPlug } from "./cari-plug/AceCariPlug";
 import { AceTengahLive } from "./tengah-live/AceTengahLive";
 import { TL_DURATION } from "./tengah-live/timing";
+import { AceNakBayar } from "./nak-bayar/AceNakBayar";
+import { NB_DURATION } from "./nak-bayar/timing";
 import { VIDEO } from "./theme";
 
 export const RemotionRoot: React.FC = () => (
@@ -54,6 +56,15 @@ export const RemotionRoot: React.FC = () => (
       height={VIDEO.height}
       fps={VIDEO.fps}
       durationInFrames={TL_DURATION}
+    />
+    {/* Campaign: "Nak Bayar, Bateri Pula Habis." (poster-driven, 30 s) */}
+    <Composition
+      id="AceNakBayar"
+      component={AceNakBayar}
+      width={VIDEO.width}
+      height={VIDEO.height}
+      fps={VIDEO.fps}
+      durationInFrames={NB_DURATION}
     />
   </>
 );

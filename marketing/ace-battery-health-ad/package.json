@@ -10,7 +10,8 @@
     "render:merah": "remotion render AceBateriMerah out/ace-bateri-merah-20s.mp4",
     "render:plug": "remotion render AceCariPlug out/ace-cari-plug-20s.mp4",
     "render:live": "remotion render AceTengahLive out/ace-tengah-live-30s.mp4",
-    "render:all": "npm run render && npm run render:v2 && npm run render:merah && npm run render:plug && npm run render:live",
+    "render:bayar": "remotion render AceNakBayar out/ace-nak-bayar-30s.mp4",
+    "render:all": "npm run render && npm run render:v2 && npm run render:merah && npm run render:plug && npm run render:live && npm run render:bayar",
     "still": "remotion still AceBatteryHealth out/still.png --frame=200",
     "typecheck": "tsc --noEmit"
   },
