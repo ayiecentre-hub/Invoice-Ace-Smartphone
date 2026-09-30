@@ -10,6 +10,8 @@ import { AceNakBayar } from "./nak-bayar/AceNakBayar";
 import { NB_DURATION } from "./nak-bayar/timing";
 import { AcePagiCas } from "./pagi-cas/AcePagiCas";
 import { PC_DURATION } from "./pagi-cas/timing";
+import { AcePhoneLembap } from "./phone-lembap/AcePhoneLembap";
+import { PL_DURATION } from "./phone-lembap/timing";
 import { VIDEO } from "./theme";
 
 export const RemotionRoot: React.FC = () => (
@@ -76,6 +78,15 @@ export const RemotionRoot: React.FC = () => (
       height={VIDEO.height}
       fps={VIDEO.fps}
       durationInFrames={PC_DURATION}
+    />
+    {/* Campaign: "Phone Lembap? Semak Bateri Dulu." (poster-driven, 30 s) */}
+    <Composition
+      id="AcePhoneLembap"
+      component={AcePhoneLembap}
+      width={VIDEO.width}
+      height={VIDEO.height}
+      fps={VIDEO.fps}
+      durationInFrames={PL_DURATION}
     />
   </>
 );
