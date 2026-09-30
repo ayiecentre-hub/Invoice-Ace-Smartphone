@@ -17,6 +17,7 @@ The project also holds poster-driven campaigns that reuse the same component lib
 | `AceCariPlug` | "Asyik Cari Plug Setiap Hari?" | `npm run render:plug` | [`docs/CAMPAIGN-cari-plug.md`](docs/CAMPAIGN-cari-plug.md): poster analysis, storyboard, VO, asset guide, QC |
 | `AceTengahLive` (**30 s**, 900 frames) | "Tengah Live, Bateri Buat Hal?" | `npm run render:live` | [`docs/CAMPAIGN-tengah-live.md`](docs/CAMPAIGN-tengah-live.md): poster analysis, storyboard, VO, asset guide, QC |
 | `AceNakBayar` (**30 s**, 900 frames) | "Nak Bayar, Bateri Pula Habis." | `npm run render:bayar` | [`docs/CAMPAIGN-nak-bayar.md`](docs/CAMPAIGN-nak-bayar.md): poster analysis, storyboard, VO, asset guide, QC |
+| `AcePagiCas` (**30 s**, 900 frames) | "Pagi Cas, Tengah Hari Habis?" | `npm run render:pagi` | [`docs/CAMPAIGN-pagi-cas.md`](docs/CAMPAIGN-pagi-cas.md): poster analysis, storyboard, VO, asset guide, QC |
 
 `npm run render:all` renders every composition.
 

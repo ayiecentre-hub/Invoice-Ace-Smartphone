@@ -8,6 +8,8 @@ import { AceTengahLive } from "./tengah-live/AceTengahLive";
 import { TL_DURATION } from "./tengah-live/timing";
 import { AceNakBayar } from "./nak-bayar/AceNakBayar";
 import { NB_DURATION } from "./nak-bayar/timing";
+import { AcePagiCas } from "./pagi-cas/AcePagiCas";
+import { PC_DURATION } from "./pagi-cas/timing";
 import { VIDEO } from "./theme";
 
 export const RemotionRoot: React.FC = () => (
@@ -65,6 +67,15 @@ export const RemotionRoot: React.FC = () => (
       height={VIDEO.height}
       fps={VIDEO.fps}
       durationInFrames={NB_DURATION}
+    />
+    {/* Campaign: "Pagi Cas, Tengah Hari Habis?" (poster-driven, 30 s) */}
+    <Composition
+      id="AcePagiCas"
+      component={AcePagiCas}
+      width={VIDEO.width}
+      height={VIDEO.height}
+      fps={VIDEO.fps}
+      durationInFrames={PC_DURATION}
     />
   </>
 );

@@ -6,7 +6,7 @@ import { COLORS, CONTENT, EASE, FONTS } from "../../theme";
 import { FreeCheckCard } from "./Signs";
 
 /** 0:18–0:20 CTA: poster offer "Pemeriksaan awal percuma." + "WhatsApp Semak Bateri →" + sign-off. */
-export const BrandEndCardCP: React.FC = () => {
+export const BrandEndCardCP: React.FC<{ ctaLabel?: string }> = ({ ctaLabel = "WHATSAPP SEMAK BATERI →" }) => {
   const frame = useCurrentFrame();
   const logo = prog(frame, 2, 14);
   const tag = prog(frame, 24, 12);
@@ -21,7 +21,7 @@ export const BrandEndCardCP: React.FC = () => {
         <FreeCheckCard p={prog(frame, 6, 12)} draw={prog(frame, 8, 16)} dark />
       </div>
       <div style={{ position: "absolute", left: CONTENT.left, top: 760 }}>
-        <CTAButton start={12} pulseAt={30} label="WHATSAPP SEMAK BATERI →" />
+        <CTAButton start={12} pulseAt={30} label={ctaLabel} />
       </div>
       <div style={{ position: "absolute", left: CONTENT.left, width: CONTENT.width, top: 966, textAlign: "center", fontFamily: FONTS.serif, fontStyle: "italic", fontSize: 58, color: COLORS.pearl, opacity: tag, transform: `translateY(${tween(frame, 24, 12, 16, 0, EASE.out)}px)` }}>
         One Place. One Trust.

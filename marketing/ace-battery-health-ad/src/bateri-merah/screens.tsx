@@ -3,11 +3,11 @@ import { COLORS } from "../theme";
 import { StatusBar } from "../components/PhoneMockup";
 
 /** Large battery read-out (as on the poster): red sliver + "9%". */
-export const BigBatteryScreen: React.FC<{ level: number; pulse: number }> = ({ level, pulse }) => (
+export const BigBatteryScreen: React.FC<{ level: number; pulse: number; time?: string }> = ({ level, pulse, time = "08:42" }) => (
   <div style={{ position: "absolute", inset: 0, background: "radial-gradient(90% 60% at 50% 40%, #16171f 0%, #050507 100%)", fontFamily: "Inter", color: "#fff" }}>
-    <StatusBar dark level={level} time="08:42" />
+    <StatusBar dark level={level} time={time} />
     <div style={{ position: "absolute", left: 95, top: 330, width: 190, height: 88, borderRadius: 20, border: "5px solid rgba(255,255,255,0.85)", padding: 7 }}>
-      <div style={{ width: `${Math.max(8, level)}%`, height: "100%", borderRadius: 10, background: COLORS.lowBattery, opacity: 0.6 + 0.4 * pulse }} />
+      <div style={{ width: `${Math.max(8, level)}%`, height: "100%", borderRadius: 10, background: level > 20 ? COLORS.iosGreen : COLORS.lowBattery, opacity: 0.6 + 0.4 * pulse }} />
     </div>
     <div style={{ position: "absolute", left: 290, top: 360, width: 10, height: 28, borderRadius: "0 5px 5px 0", background: "rgba(255,255,255,0.85)" }} />
     <div style={{ position: "absolute", left: 0, right: 0, top: 440, textAlign: "center", fontSize: 44, fontWeight: 600, letterSpacing: "-0.02em" }}>{level}%</div>
